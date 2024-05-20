@@ -69,13 +69,13 @@ fi
 echo "Checking if tf-summarize is installed:"
 if [[ ! "$($BIN_DIR/tf-summarize -v | head -n 1)" =~ ${TF_SUMMARIZE_VERSION} ]]; then
     echo "Getting tf-summarize ${TF_SUMMARIZE_VERSION} ..."
-    wget "https://github.com/dineshba/tf-summarize/releases/download/v${TF_SUMMARIZE_VERSION}/tf-summarize_linux_amd64.zip"
+    wget "https://github.com/dineshba/tf-summarize/releases/download/v${TF_SUMMARIZE_VERSION}/tf-summarize_linux_amd64.tar.gz"
     wget "https://github.com/dineshba/tf-summarize/releases/download/v${TF_SUMMARIZE_VERSION}/tf-summarize_SHA256SUMS"
-    grep "tf-summarize_linux_amd64.zip" < tf-summarize_SHA256SUMS | sha256sum --check  --status
-    unzip "tf-summarize_linux_amd64.zip" tf-summarize
+    grep "tf-summarize_linux_amd64.tar.gz" < tf-summarize_SHA256SUMS | sha256sum --check  --status
+    tar -zxvf "tf-summarize_linux_amd64.tar.gz" tf-summarize
     chmod +x tf-summarize
     mv tf-summarize "${BIN_DIR}"
-    rm "tf-summarize_linux_amd64.zip" "tf-summarize_SHA256SUMS"
+    rm "tf-summarize_linux_amd64.tar.gz" "tf-summarize_SHA256SUMS"
     echo "Done downloading tf-summarize ${TF_SUMMARIZE_VERSION}"
 else
     echo "tf-summarize version ${TF_SUMMARIZE_VERSION} is already installed"
